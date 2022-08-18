@@ -1,11 +1,9 @@
 package e.commerce.app.utils
 
 import android.util.Patterns
+import androidx.core.util.PatternsCompat
 
 
+fun CharSequence?.isValidEmail() = !isNullOrEmpty() && PatternsCompat.EMAIL_ADDRESS.matcher(this).matches()
 
-    fun CharSequence?.isValidEmail(): Boolean {
 
-        return !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this.toString()).matches();
-
-    }

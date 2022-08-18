@@ -32,7 +32,6 @@ import e.commerce.app.screen.navigations.Screens
 fun UserProfileScreen ( navController: NavController) {
 
 
-
     Box(Modifier.verticalScroll(rememberScrollState())) {
 
         Image(painter = painterResource(id = R.drawable.pastel_purple_color_solid_background_1920x1080),
@@ -88,7 +87,7 @@ fun ProfileContent() {
             painter = painterResource(R.drawable.woman), contentDescription = "profile",
             modifier = Modifier
                 .clip(RoundedCornerShape(100))
-                .size(150.dp)
+                .size(150.dp).clickable {  }
         )
         Text(
             "User Name",

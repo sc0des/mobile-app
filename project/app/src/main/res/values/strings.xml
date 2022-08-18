@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">project</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_user_profile_screen">UserProfileScreen</string>
+    <string name="title_activity_user">UserActivity</string>
+    <string name="title_activity_user_main">UserMainActivity</string>
+    <string name="title_activity_user_activityt">UserActivityt</string>
 </resources>

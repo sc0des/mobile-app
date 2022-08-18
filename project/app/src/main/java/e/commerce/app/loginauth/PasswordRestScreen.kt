@@ -75,7 +75,7 @@ fun PasswordRestScreen ( navController: NavController) {
                 
                 if (email.value != "" ) {
                     
-                    if(!email.value.isValidEmail()){
+                    if(email.value.isValidEmail()){
 
                     firebasesAuth.sendPasswordResetEmail(email.value)
                         .addOnCompleteListener {

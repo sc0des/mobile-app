@@ -1,6 +1,6 @@
 package e.commerce.app.utils
 
-fun CharSequence?.isNull(): Boolean {
+fun CharSequence?.isntNull(): Boolean {
 
     return !isNullOrEmpty() ;
 }

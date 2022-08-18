@@ -9,25 +9,23 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AccountBox
 import androidx.compose.material.icons.outlined.FavoriteBorder
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.ShoppingCart
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import e.commerce.app.screen.navigations.Screens
 
 
 @Composable
@@ -38,16 +36,19 @@ fun HomeScreen (navController: NavController) {
 
        Image(painter = painterResource(id = R.drawable.pastel_purple_color_solid_background_1920x1080),
            contentDescription = "Header Background", contentScale = ContentScale.FillWidth,
-           modifier = Modifier.fillMaxWidth().offset(0.dp, (-30).dp))
+           modifier = Modifier
+               .fillMaxWidth()
+               .offset(0.dp, (-30).dp))
             Column {
-                AppBar()
-                Content()
+                AppBar(navController)
+                ProductView(navController)
+                Content(navController)
             }
         }
     }
 
 @Composable
-fun AppBar() {
+fun AppBar(navController: NavController) {
     Row(
         Modifier
             .padding(16.dp)
@@ -72,41 +73,54 @@ fun AppBar() {
                 .fillMaxHeight()
         )
         Spacer(modifier = Modifier.width(8.dp))
-        IconButton(onClick = { }) {
-            Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "", tint = Color.White)
+        IconButton(onClick = { navController.navigate(route = Screens.Users.route) }) {
+            Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "favorites", tint = Color.White)
         }
-        IconButton(onClick = {}) {
-            Icon(imageVector = Icons.Outlined.ShoppingCart, contentDescription = "", tint = Color.White)
+        IconButton(onClick = { navController.navigate(route = Screens.Users.route)}) {
+            Icon(imageVector = Icons.Outlined.ShoppingCart, contentDescription = "shopping_cart", tint = Color.White)
         }
-        IconButton(onClick = {}) {
-            Icon(imageVector = Icons.Outlined.AccountBox, contentDescription = "", tint = Color.White)
+        IconButton(onClick = {navController.navigate(route = Screens.Users.route)}) {
+            Icon(imageVector = Icons.Outlined.AccountBox, contentDescription = "user_profile", tint = Color.White)
         }
     }
 }
 
+
 @Composable
-fun Content() {
+fun ProductView(navController: NavController) {
+    
     Column() {
-        CategorySection()
+        
+    }
+    
+    
+    
+    
+    
+    
+}
+
+@Composable
+fun Content(navController: NavController) {
+    Column() {
+        CategorySection( navController )
         Spacer(modifier = Modifier.height(16.dp))
-        NewCollectionSection()
+        NewCollectionSection(navController)
         Spacer(modifier = Modifier.height(16.dp))
 
     }
 }
 
 @Composable
-fun CategorySection() {
+fun CategorySection( navController: NavController) {
+    Spacer(modifier = Modifier.height(16.dp))
     Column(Modifier.padding(horizontal = 16.dp)) {
         Row(
             Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Category", style = MaterialTheme.typography.h6)
-            TextButton(onClick = {}) {
-                Text(text = "More", color = MaterialTheme.colors.primary)
-            }
+            Text(text = "Categories", style = MaterialTheme.typography.h6)
         }
 
         Spacer(modifier = Modifier.height(15.dp))
@@ -115,25 +129,30 @@ fun CategorySection() {
             Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            CategoryButton(
+            CategoryButton( 
                 text = "DIY",
                 icon = painterResource(id = R.drawable.art),
-                backgroundColor = Color.White
+                backgroundColor = Color.White ,
+                navController = navController
             )
             CategoryButton(
                 text = "Handmade",
                 icon = painterResource(id = R.drawable.handmade),
-                backgroundColor = Color.White
+                backgroundColor = Color.White,
+                navController = navController
+
+
             )
             CategoryButton(
                 text = "Art",
-                icon = painterResource(id = R.drawable.paint),
-                backgroundColor = Color.White
+                icon = painterResource(id = R.drawable.artp),
+                backgroundColor = Color.White,
+                navController = navController
             )
             CategoryButton(
-                text = "Art",
-                icon = painterResource(id = R.drawable.paint),
-                backgroundColor = Color.White
+                text = "Book",
+                icon = painterResource(id = R.drawable.book),
+                backgroundColor = Color.White,navController = navController
             )
 
         }
@@ -144,12 +163,14 @@ fun CategorySection() {
 fun CategoryButton(
     text: String = "",
     icon: Painter,
-    backgroundColor: Color
+    backgroundColor: Color,
+    navController: NavController
+    
 ) {
     Column(
         Modifier
             .width(72.dp)
-            .clickable { }
+            .clickable {  }
     ) {
         Box(
             Modifier
@@ -168,7 +189,7 @@ fun CategoryButton(
 }
 
 @Composable
-fun NewCollectionSection() {
+fun NewCollectionSection(navController: NavController) {
     Column() {
         Row(
             Modifier
@@ -183,28 +204,31 @@ fun NewCollectionSection() {
             }
         }
 
-        NewCollectionItem()
+        NewCollectionItem(navController)
     }
 }
 
 @Composable
-fun NewCollectionItem() {
+fun NewCollectionItem(navController: NavController) {
     LazyRow(
         contentPadding = PaddingValues(horizontal = 16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+
     ) {
         item {
             BestSellerItem(
-                imagePainter = painterResource(id = R.drawable.art),
-                title = "Painting",
+                imagePainter = painterResource(id = R.drawable.balloon),
+                title = "Balloon",
                 price = "1.99",
+                navController = navController
             )
         }
         item {
             BestSellerItem(
-                imagePainter = painterResource(id = R.drawable.handmade),
-                title = "Handmade Pottery",
+                imagePainter = painterResource(id = R.drawable.drawing_tools),
+                title = "Drawing tools",
                 price = "2.64",
+                navController = navController
             )
         }
         item {
@@ -212,8 +236,41 @@ fun NewCollectionItem() {
                 imagePainter = painterResource(id = R.drawable.paint),
                 title = "Artistic Kit ",
                 price = "4.76",
-
+                navController = navController
             )
+        }
+    }
+
+    Spacer(modifier = Modifier.height(15.dp))
+
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        item {
+            BestSellerItem(
+                imagePainter = painterResource(id = R.drawable.party),
+                title = "Party Set",
+                price = "3.99",
+                navController = navController
+            )
+        }
+        item {
+            BestSellerItem(
+                imagePainter = painterResource(id = R.drawable.drink),
+                title = "Handmade Mugs",
+                price = "2.64",
+                navController = navController
+            )
+        }
+        item {
+            BestSellerItem(
+                imagePainter = painterResource(id = R.drawable.flowers),
+                title = "Vase ",
+                price = "4.76",
+                navController = navController
+
+                )
         }
     }
 }
@@ -222,12 +279,15 @@ fun NewCollectionItem() {
 fun BestSellerItem(
     title: String = "",
     price: String = "",
-    discountPercent: Int = 0,
-    imagePainter: Painter
+    imagePainter: Painter,
+    navController: NavController
 ) {
     Card(
         Modifier
             .width(160.dp)
+            .clickable { navController.navigate(route = Screens.Product.route)
+
+            }
     ) {
         Column(
             Modifier
@@ -237,7 +297,8 @@ fun BestSellerItem(
                 painter = imagePainter, contentDescription = "",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .aspectRatio(1f),
+                    .aspectRatio(1f)
+                    .clickable { navController.navigate(route = Screens.Product.route) },
                 contentScale = ContentScale.Fit
             )
             Column(
@@ -246,19 +307,7 @@ fun BestSellerItem(
                     .padding(horizontal = 8.dp)
             ) {
                 Text(text = title, fontWeight = FontWeight.Bold)
-                Row {
-                    Text(
-                        "$${price}",
-                        textDecoration = if (discountPercent > 0)
-                            TextDecoration.LineThrough
-                        else
-                            TextDecoration.None,
-                        color = if (discountPercent > 0) Color.Gray else Color.Black
-                    )
-                    if (discountPercent > 0) {
-                        Text(text = "[$discountPercent%]", color = MaterialTheme.colors.primary)
-                    }
-                }
+
             }
         }
     }

@@ -40,7 +40,7 @@ import com.google.firebase.ktx.Firebase
 import e.commerce.app.R
 import e.commerce.app.screen.navigations.Screens
 import e.commerce.app.ui.theme.Purple700
-import e.commerce.app.utils.isNull
+import e.commerce.app.utils.isntNull
 
 
 @Composable
@@ -109,7 +109,7 @@ fun LoginScreen ( navController: NavController) {
         Box(modifier = Modifier.padding(40.dp, 0.dp, 40.dp, 0.dp)) {
             Button(
                 onClick = {
-                    if (!(email.value.isNull() || password.value.isNull())) {
+                    if (email.value.isntNull() && password.value.isntNull()) {
                             auth.signInWithEmailAndPassword(email.value, password.value)
                                 .addOnCompleteListener {
                                     if (it.isSuccessful) {

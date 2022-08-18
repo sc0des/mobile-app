@@ -14,6 +14,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -34,6 +35,9 @@ import e.commerce.app.ui.theme.Purple1
 
 
 
+
+
+
 @Composable
 
 fun SignUpScreen (navController: NavController) {
@@ -44,7 +48,7 @@ fun SignUpScreen (navController: NavController) {
     val scaffoldState = rememberScaffoldState()
     val focusManager = LocalFocusManager.current
 
-    val name = remember { mutableStateOf("") }
+    val name = rememberSaveable{ mutableStateOf("") } // to save name
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val confirmPassword = remember { mutableStateOf("") }

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="e.commerce.app">
+    <!-- Internet Permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -9,6 +11,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Project">
+        <activity
+            android:name=".UserActivityt"
+            android:exported="false"
+            android:label="@string/title_activity_user_activityt"
+            android:theme="@style/Theme.Project" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Project" />
+        <activity
+            android:name=".UserMainActivity"
+            android:exported="false"
+            android:label="@string/title_activity_user_main"
+            android:theme="@style/Theme.Project" />
+        <activity
+            android:name=".UserActivity"
+            android:exported="false"
+            android:label="@string/title_activity_user"
+            android:theme="@style/Theme.Project" />
+        <activity
+            android:name=".loginauth.LoginActivity"
+            android:exported="false"
+            android:label="@string/title_activity_login"
+            android:theme="@style/Theme.Project" />
+        <activity
+            android:name=".profile.UserProfileScreen"
+            android:exported="false"
+            android:label="@string/title_activity_user_profile_screen"
+            android:theme="@style/Theme.Project" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
