@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">In-Class Exercises</string>
+    <string name="image_text">Wales,United Kingdom</string>
+    <string name="amy_turner">Amy Turner</string>
+    <string name="map_pin">none</string>
+    <string name="save_pin">none</string>
+    <string name="fav">none</string>
+    <string name="imageView8">wales_image</string>
+    <string name="camera_text">Camera</string>
+    <string name="camera_name">Nikon D3200</string>
+    <string name="aperture_text">Aperture</string>
+    <string name="aperture_value">f/5.0</string>
+    <string name="focal_length">Focal Length</string>
+    <string name="focal_length_value">18.0mm</string>
+    <string name="shutter">Shutter Speed</string>
+    <string name="shutter_value">1/125s</string>
+    <string name="Iso">ISO</string>
+    <string name="iso_value">100</string>
+    <string name="dimensions">Dimensions</string>
+    <string name="dimensions_value">3906 x 4882</string>
+    <string name="views">Views</string>
+    <string name="number_of_views">8.8M</string>
+    <string name="save">Downloads</string>
+    <string name="number_of_saves">99.1K</string>
+    <string name="likes">Likes</string>
+    <string name="number_of_likes">1.8k</string>
+    <string name="wales">wales</string>
+    <string name="united_kingdom">united kingdom</string>
+    <string name="main_item_clicked">You\'ve clicked on: %d</string>
+    <string name="main_unable_to_fetch_images">Unable to fetch images at this moment.</string>
+    <string name="description_image_preview">itemss</string>
+
+
+</resources>
