@@ -1,1 +1,1 @@
-# picture_screen
+# Photo Details Activity using Unsplash API
