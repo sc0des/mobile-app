@@ -2,6 +2,7 @@ package Exercises.inc
 
 import Exercises.inc.data.UnsplashApiProvider
 import Exercises.inc.model.UnsplashItem
+import Exercises.inc.model.UnsplashSearch
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -18,12 +19,15 @@ class MainActivity : AppCompatActivity() {
         val provider = UnsplashApiProvider()
         provider.fetchImages(this)
 
+        //add provider.fetchPhotoDetails(details, this)
+
         findViewById<RecyclerView>(R.id.rv_container).apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(context)
             adapter = MainAdapter(emptyList()) {
                 Toast.makeText(context, getString(R.string.main_item_clicked, it), Toast.LENGTH_SHORT).show()
                 openDetailsActivity()
+
             }
         }
     }

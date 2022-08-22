@@ -32,6 +32,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@string/number_of_views"
+            android:id="@+id/image_views"
             android:textColor="@android:color/white"
             android:textSize="15sp"
             android:textStyle="normal"
@@ -68,6 +69,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@string/number_of_saves"
+            android:id="@+id/image_downloads"
             android:textColor="@android:color/white"
             android:textSize="15sp"
             android:textStyle="normal"
@@ -81,7 +83,6 @@
     <!-- Likes -->
 
     <LinearLayout
-        android:id="@+id/image_likes"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -105,6 +106,7 @@
             android:maxLines="1"
             android:ellipsize="end"
             android:text="@string/number_of_likes"
+            android:id="@+id/image_likes"
             android:textColor="@android:color/white"
             android:textSize="15sp"
             android:textStyle="normal"

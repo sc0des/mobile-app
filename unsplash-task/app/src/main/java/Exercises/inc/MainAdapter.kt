@@ -1,6 +1,7 @@
 package Exercises.inc
 
 import Exercises.inc.model.UnsplashItem
+import Exercises.inc.model.UnsplashSearch
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.activity_details.view.*
 import kotlinx.android.synthetic.main.image_info.view.*
-
+import kotlinx.android.synthetic.main.tags_buttons.view.*
 
 class MainAdapter(private var images: List<UnsplashItem>, val onClick: (Int) -> Unit):
     RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
@@ -33,6 +34,13 @@ class MainAdapter(private var images: List<UnsplashItem>, val onClick: (Int) -> 
         val shutterv = itemView.shutter_s as TextView
         val dims = itemView.widthv as TextView
 
+        val viewv = itemView.image_views as TextView
+        val downloadsv = itemView.image_downloads as TextView
+        val likess = itemView.image_likes as TextView
+
+        val bv = itemView.button as TextView
+        val bv1 = itemView.button1 as TextView
+
     }
 
 
@@ -49,18 +57,20 @@ class MainAdapter(private var images: List<UnsplashItem>, val onClick: (Int) -> 
         holder.image.setOnClickListener {
             onClick(position)
         }
-
         holder.locationv.text = image.user.location
         holder.author.text = image.user.name
-
         holder.aperturev.text = null
         holder.focallengthv.text = null
         holder.isov.text = null
         holder.modelv.text = null
         holder.shutterv.text = null
         holder.dims.text= (image.width.toString() + "x"+ image.height.toString())
+        holder.viewv.text = null
+        holder.downloadsv.text = null
+        holder.likess.text = null
 
-
+        holder.bv.text = null
+        holder.bv1.text = null
 
 
     }

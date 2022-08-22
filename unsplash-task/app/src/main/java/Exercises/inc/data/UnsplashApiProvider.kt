@@ -1,8 +1,9 @@
 package Exercises.inc.data
 
-
 import Exercises.inc.MainActivity
+import Exercises.inc.data.cb.UnsplashResult
 import Exercises.inc.model.UnsplashItem
+import Exercises.inc.model.UnsplashSearch
 import android.util.Log
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -51,4 +52,27 @@ class UnsplashApiProvider {
             }
         })
     }
+
+    // Photo Details
+
+    fun fetchPhotoDetails(id: String, cb: MainActivity) {
+        retrofit.fetchPhotoDetails(id=id).enqueue(object : Callback<UnsplashSearch> {
+            override fun onResponse(call: Call<UnsplashSearch>, response: Response<UnsplashSearch>) {
+                if (response.isSuccessful && response.body() != null) {
+                    Log.d(TAG, "searchImages | response: ${response.body()}")
+                    cb.onDataFetchedSuccess(response.body()!!.results)
+                } else {
+                    cb.onDataFetchedFailed()
+                }
+            }
+
+            override fun onFailure(call: Call<UnsplashSearch>, t: Throwable) {
+                Log.e(TAG, "searchImages | error loading images", t)
+                cb.onDataFetchedFailed()
+            }
+        })
+    }
 }
+
+
+
