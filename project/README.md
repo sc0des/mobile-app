@@ -1,4 +1,7 @@
-This is a simple e-commerce application 
+# Simple Application 
+
+
+Application Theme : E-commerce 
 
 
 Features:
