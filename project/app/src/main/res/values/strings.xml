@@ -5,4 +5,5 @@
     <string name="title_activity_user">UserActivity</string>
     <string name="title_activity_user_main">UserMainActivity</string>
     <string name="title_activity_user_activityt">UserActivityt</string>
+    <string name="description_image_preview">profilep</string>
 </resources>

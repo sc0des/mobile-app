@@ -1,8 +1,5 @@
 package e.commerce.app.loginauth
 
-import android.content.ContentValues.TAG
-import android.util.Log
-import android.util.Patterns
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

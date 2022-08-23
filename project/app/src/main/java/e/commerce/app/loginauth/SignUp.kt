@@ -14,7 +14,6 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -31,11 +30,10 @@ import androidx.navigation.compose.rememberNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import e.commerce.app.data.UserDataRoom
+import e.commerce.app.data.Userdata
 import e.commerce.app.ui.theme.Purple1
-
-
-
-
+import kotlinx.coroutines.launch
 
 
 @Composable
@@ -43,12 +41,13 @@ import e.commerce.app.ui.theme.Purple1
 fun SignUpScreen (navController: NavController) {
 
     // declare variables
+    val coroutineScope = rememberCoroutineScope()
     var onLogin = false
     val context = LocalContext.current
     val scaffoldState = rememberScaffoldState()
     val focusManager = LocalFocusManager.current
 
-    val name = rememberSaveable{ mutableStateOf("") } // to save name
+    val name = remember{ mutableStateOf("") } // to save name
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
     val confirmPassword = remember { mutableStateOf("") }
@@ -127,7 +126,6 @@ fun SignUpScreen (navController: NavController) {
                 Text(text = "Required", color = Color.Red)
             }
 
-
             Spacer(modifier = Modifier.height(20.dp))
 
             OutlinedTextField(
@@ -167,16 +165,6 @@ fun SignUpScreen (navController: NavController) {
             if (confirmPasswordErrorState.value) {
                 Text(text = "Required", color = Color.Red)
 
-                if (confirmPasswordErrorState.value) {
-                    val msg = if (confirmPassword.value.isEmpty()) {
-                        "Required"
-                    } else if (confirmPassword.value != password.value) {
-                        "Password not matching"
-                    } else {
-                        ""
-                    }
-                    Text(text = msg, color = Color.Red)
-                }
             }
 
             Spacer(Modifier.size(35.dp))
@@ -184,20 +172,55 @@ fun SignUpScreen (navController: NavController) {
 
             Button(
                 onClick = {
-                    if (!( name.value == "" || email.value == "" || password.value == "" || confirmPassword.value == "")) {
+                    if (!( name.value == "" || email.value == "" || password.value == "" || confirmPassword.value == "" )) {
                         auth.createUserWithEmailAndPassword(email.value, password.value)
-                            .addOnSuccessListener{
-                                if (!onLogin){
+                            .addOnCompleteListener{
+                                if(it.isSuccessful){
                                     navController.navigate("login_screen")
                                     onLogin = true
-                                    // Successful register
+                                    // Successful register and saves locally
+                                    coroutineScope.launch {
+                                        val usser = Userdata(name.toString())
+                                        UserDataRoom.getInstance(context).userdataDao().insert(usser)
+                                    }
                                     Log.d("login", "signInWithEmail:success")
-                                                                }
-                                else {
-                                    Log.w("register", "registerWithEmail:failure")
-                                    Toast.makeText(context, "user already exist!", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(context, "registred!", Toast.LENGTH_SHORT).show()
                                 }
                             }
+
+                    }
+                    else
+                    {
+                        if (name.value.isEmpty()) {
+                        nameErrorState.value = true
+                            Toast.makeText(context, "name required !", Toast.LENGTH_SHORT).show()
+                    }
+                        else if (email.value.isEmpty()) {
+                        emailErrorState.value = true
+                            Toast.makeText(context, "email required!", Toast.LENGTH_SHORT).show()
+                    }
+                        else if (email.value.isEmpty() && isEmailValid) {
+                            emailErrorState.value = true
+                            Toast.makeText(context, "incorrect email !", Toast.LENGTH_SHORT).show()
+                        }
+
+                        else if (password.value.isEmpty()){
+                        passwordErrorState.value = true
+                            Toast.makeText(context, "password required !", Toast.LENGTH_SHORT).show()
+                    }
+                        else if ( confirmPassword.value.isEmpty()) {
+                        confirmPasswordErrorState.value = true
+                            Toast.makeText(context, "password required !", Toast.LENGTH_SHORT).show()
+                    }
+                        else if (confirmPassword.value!= password.value) {
+                        confirmPasswordErrorState.value = true
+                            Toast.makeText(context, "incorrect password and confirm password !", Toast.LENGTH_SHORT).show()
+                    }
+                        else {
+                            Log.w("register", "registerWithEmail:failure")
+                            Toast.makeText(context, "Try again !", Toast.LENGTH_SHORT).show()
+
+                    }
 
                     }
                 }, content = { Text(text = "Register") },

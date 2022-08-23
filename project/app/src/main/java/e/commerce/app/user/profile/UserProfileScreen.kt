@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -24,11 +25,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
+import coil.transform.CircleCropTransformation
 import e.commerce.app.R
 import e.commerce.app.screen.navigations.Screens
 
 @Composable
-
 fun UserProfileScreen ( navController: NavController) {
 
 
@@ -82,9 +85,16 @@ fun ProfileContent() {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
+        val painter1 = rememberAsyncImagePainter(
+            model = ImageRequest.Builder(LocalContext.current)
+                .data("https://cdn-icons-png.flaticon.com/512/4825/4825112.png")
+                .transformations(listOf(CircleCropTransformation()))
+                .build()
+        )
 
         Image(
-            painter = painterResource(R.drawable.woman), contentDescription = "profile",
+            painter = painter1,
+            contentDescription = stringResource(id = R.string.description_image_preview),
             modifier = Modifier
                 .clip(RoundedCornerShape(100))
                 .size(150.dp).clickable {  }
